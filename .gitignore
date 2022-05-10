@@ -1,3 +1,2 @@
 *.ign
-*.iso
-*.iso.sig
+/*.iso*
