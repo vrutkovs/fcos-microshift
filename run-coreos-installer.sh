@@ -9,8 +9,8 @@ cmd+=" --ignition=${ignition_file}"
 cmd+=" ${install_device}"
 if $cmd; then
     echo "Install Succeeded!"
-    return 0
+    exit 0
 else
     echo "Install Failed!"
-    return 1
+    exit 1
 fi
