@@ -1,0 +1,4 @@
+resources:
+  - olm-crds.yaml
+  - olm.yaml
+  - argocd-operator.yaml

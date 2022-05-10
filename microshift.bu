@@ -34,6 +34,9 @@ systemd:
         [Install]
         WantedBy=multi-user.target
 storage:
+  trees:
+    - local: manifests
+      path: /etc/microshift/manifests
   files:
     - path: /usr/local/bin/install-microshift
       mode: 0755
