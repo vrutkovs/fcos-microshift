@@ -23,12 +23,14 @@ systemd:
         After=network-online.target
         Wants=network-online.target
         ConditionPathExists=!/var/lib/microshift
+
         [Service]
         RemainAfterExit=yes
         Type=oneshot
-        ExecStartPre=/usr/local/bin/install-microshift
+        ExecStart=/usr/local/bin/install-microshift
         StandardOutput=kmsg+console
         StandardError=kmsg+console
+
         [Install]
         WantedBy=multi-user.target
 storage:
