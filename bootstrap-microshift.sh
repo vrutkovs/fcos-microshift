@@ -14,3 +14,5 @@ oc create -f https://operatorhub.io/install/argocd-operator.yaml
 
 oc apply -f /etc/microshift/manifests/argocg-settings.yaml
 oc apply -f /etc/microshift/manifests/cluster-app.yaml
+
+touch /var/lib/.microshift-provisioned

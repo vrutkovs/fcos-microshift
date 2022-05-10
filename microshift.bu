@@ -22,7 +22,7 @@ systemd:
         [Unit]
         After=network-online.target
         Wants=network-online.target
-        ConditionPathExists=!/var/lib/microshift
+        ConditionPathExists=!/var/lib/.microshift-installed
 
         [Service]
         RemainAfterExit=yes
@@ -39,7 +39,8 @@ systemd:
         [Unit]
         After=network-online.target
         Wants=network-online.target
-        ConditionPathExists=/var/lib/microshift
+        ConditionPathExists=/var/lib/.microshift-installed
+        ConditionPathExists=!/var/lib/.microshift-provisioned
 
         [Service]
         RemainAfterExit=yes
