@@ -16,21 +16,18 @@ systemd:
           ExecStart=
           # Add new Execstart with `-` prefix to ignore failure`
           ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
-    - name: run-coreos-installer.service
+    - name: install-microshift.service
       enabled: true
       contents: |
         [Unit]
         After=network-online.target
         Wants=network-online.target
-        Before=systemd-user-sessions.service
-        OnFailure=emergency.target
-        OnFailureJobMode=replace-irreversibly
+        ConditionPathExists=!/var/lib/microshift
 
         [Service]
         RemainAfterExit=yes
         Type=oneshot
-        ExecStart=/usr/local/bin/run-coreos-installer
-        ExecStartPost=/usr/bin/systemctl --no-block reboot
+        ExecStart=/usr/local/bin/install-microshift
         StandardOutput=kmsg+console
         StandardError=kmsg+console
 
@@ -38,14 +35,10 @@ systemd:
         WantedBy=multi-user.target
 storage:
   files:
-    - path: /usr/local/bin/run-coreos-installer
+    - path: /usr/local/bin/install-microshift
       mode: 0755
       contents:
-        local: run-coreos-installer.sh
-    - path: /var/lib/microshift.ign
-      mode: 0644
-      contents:
-        local: microshift.ign
+        local: install-microshift.sh
     - path: /etc/profile.d/systemd-pager.sh
       mode: 0644
       contents:
