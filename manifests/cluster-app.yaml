@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster
+  namespace: operators
+  labels:
+    app.kubernetes.io/instance: gitops
+spec:
+  destination:
+    namespace: operators
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: .
+    repoURL: 'https://gitea.vrutkovs.eu/vadim/microshift-gitops.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}

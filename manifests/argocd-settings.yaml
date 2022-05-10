@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: gitops
+  namespace: operators
+  labels:
+    app.kubernetes.io/instance: gitops
+spec:
+  rbac:
+    defaultPolicy: 'role:admin'
+  resourceCustomizations: |
+    route.openshift.io/Route:
+      ignoreDifferences: |
+        jsonPointers:
+        - /spec/host
+    image.openshift.io/ImageStream:
+      ignoreDifferences: |
+        jqPathExpressions:
+        - .spec.tags[]?.generation
+        - .spec.tags[]?.annotations
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - PipelineRun
+      - TaskRun

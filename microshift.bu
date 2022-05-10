@@ -33,6 +33,23 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
+    - name: bootstrap-microshift.service
+      enabled: true
+      contents: |
+        [Unit]
+        After=network-online.target
+        Wants=network-online.target
+        ConditionPathExists=/var/lib/microshift
+
+        [Service]
+        RemainAfterExit=yes
+        Type=oneshot
+        ExecStart=/usr/local/bin/bootstrap-microshift
+        StandardOutput=kmsg+console
+        StandardError=kmsg+console
+
+        [Install]
+        WantedBy=multi-user.target
 storage:
   trees:
     - local: manifests
@@ -42,6 +59,10 @@ storage:
       mode: 0755
       contents:
         local: install-microshift.sh
+    - path: /usr/local/bin/bootstrap-microshift
+      mode: 0755
+      contents:
+        local: bootstrap-microshift.sh
     - path: /etc/profile.d/systemd-pager.sh
       mode: 0644
       contents:
