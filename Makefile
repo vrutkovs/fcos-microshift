@@ -1,6 +1,6 @@
 .PHONY: boot.ign microshift.ign
 
-fedora-coreos-35.20220410.3.1-live.x86_64.iso:
+fedora-coreos-35.20220424.3.0-live.x86_64.iso:
 	podman run --privileged --pull=always --rm -v .:/data -w /data quay.io/coreos/coreos-installer:release download -f iso
 
 boot.ign:
@@ -12,6 +12,6 @@ microshift.ign:
        --pretty --strict -d /data < microshift.bu > microshift.ign
 
 embed:
-	podman run --privileged --pull=always --rm -v .:/data -w /data quay.io/coreos/coreos-installer:release iso ignition embed -f -i boot.ign ./fedora-coreos-35.20220410.3.1-live.x86_64.iso
+	podman run --privileged --pull=always --rm -v .:/data -w /data quay.io/coreos/coreos-installer:release iso ignition embed -f -i boot.ign ./fedora-coreos-35.20220424.3.0-live.x86_64.iso
 
-all: fedora-coreos-35.20220410.3.1-live.x86_64.iso microshift.ign boot.ign embed
+all: fedora-coreos-35.20220424.3.0-live.x86_64.iso microshift.ign boot.ign embed
