@@ -1,0 +1,52 @@
+variant: fcos
+version: 1.4.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCn9eViO+t7rKylit3Olrfbz+YSqLp23dFwKbvSdAw7bAaWE9wT5rmNerG4IWmCd58v2NxcyNpAxbvk9z1TPaoILqw1S3pvBJU4ftnIIna3DbgmZbUp76YZKsVLhCvEZxHlWdw0lebwBsdIKT/4fs2H0D1SSjiem47st0ln3PTEF33mmODsLQWAT1KrzJuJI8Hlm/mlLhH5G1LAeWW8vEGtqaevHRkGvoVdPed8i/w97d7qBxklix28kuXQoegE6B317WVHvRpnOdhGgdKymxaKMuxQJ0RmwHRTnkwz5sPGBw1TrzgQfx2benNpRv1t23cUunM2yZ0qrEhc0+G6sGC1 vrutkovs@locahost
+systemd:
+  units:
+    - name: serial-getty@ttyS0.service
+      dropins:
+      - name: autologin-core.conf
+        contents: |
+          [Service]
+          # Override Execstart in main unit
+          ExecStart=
+          # Add new Execstart with `-` prefix to ignore failure`
+          ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
+    - name: install-microshift.service
+      enabled: true
+      contents: |
+        [Unit]
+        After=network-online.target
+        Wants=network-online.target
+        ConditionPathExists=!/var/lib/microshift
+        [Service]
+        RemainAfterExit=yes
+        Type=oneshot
+        ExecStartPre=/usr/local/bin/install-microshift
+        StandardOutput=kmsg+console
+        StandardError=kmsg+console
+        [Install]
+        WantedBy=multi-user.target
+storage:
+  files:
+    - path: /usr/local/bin/install-microshift
+      mode: 0755
+      contents:
+        local: install-microshift.sh
+    - path: /etc/profile.d/systemd-pager.sh
+      mode: 0644
+      contents:
+        inline: |
+          # Tell systemd to not use a pager when printing information
+          export SYSTEMD_PAGER=cat
+    - path: /etc/sysctl.d/20-silence-audit.conf
+      mode: 0644
+      contents:
+        inline: |
+          # Raise console message logging level from DEBUG (7) to WARNING (4)
+          # to hide audit messages from the interactive console
+          kernel.printk=4
