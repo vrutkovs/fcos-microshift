@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cluster
-  namespace: operators
+  namespace: gitops
   labels:
     app.kubernetes.io/instance: gitops
 spec:
   destination:
-    namespace: operators
+    namespace: gitops
     server: 'https://kubernetes.default.svc'
   project: default
   source:
