@@ -41,11 +41,11 @@ storage:
     - path: /usr/local/bin/run-coreos-installer
       mode: 0755
       contents:
-        local: run-coreos-installer.sh
+        local: ./scripts/run-coreos-installer.sh
     - path: /var/lib/microshift.ign
       mode: 0644
       contents:
-        local: microshift.ign
+        local: ./workdir/microshift.ign
     - path: /etc/profile.d/systemd-pager.sh
       mode: 0644
       contents:

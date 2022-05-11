@@ -59,11 +59,11 @@ storage:
     - path: /usr/local/bin/install-microshift
       mode: 0755
       contents:
-        local: install-microshift.sh
+        local: ./scripts/install-microshift.sh
     - path: /usr/local/bin/bootstrap-microshift
       mode: 0755
       contents:
-        local: bootstrap-microshift.sh
+        local: ./scripts/bootstrap-microshift.sh
     - path: /etc/profile.d/systemd-pager.sh
       mode: 0644
       contents:
