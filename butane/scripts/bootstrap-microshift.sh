@@ -3,8 +3,8 @@ set -eux
 
 function retry {
   local n=1
-  local max=5
-  local delay=15
+  local max=10
+  local delay=30
   while true; do
     "$@" && break || {
       if [[ $n -lt $max ]]; then
