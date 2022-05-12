@@ -6,6 +6,27 @@ metadata:
   labels:
     app.kubernetes.io/instance: gitops
 spec:
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    insecure: false
+    route:
+      annotations: {}
+      enabled: true
+      path: /
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: reencrypt
+      wildcardPolicy: None
+    service:
+      type: ""
+  dex:
+    openShiftOAuth: true
   rbac:
     defaultPolicy: 'role:admin'
   resourceCustomizations: |

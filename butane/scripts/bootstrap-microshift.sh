@@ -32,8 +32,6 @@ operator-sdk olm install
 
 oc create -f https://operatorhub.io/install/argocd-operator.yaml
 
-retry oc apply -f /etc/microshift/manifests/gitops-namespace.yaml
-retry oc apply -f /etc/microshift/manifests/argocd-settings.yaml
-retry oc apply -f /etc/microshift/manifests/cluster-app.yaml
+retry oc apply -f /etc/microshift/manifests/
 
 touch /var/lib/.microshift-provisioned
