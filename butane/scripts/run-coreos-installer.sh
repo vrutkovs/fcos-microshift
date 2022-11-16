@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 set -x
 
+wipefs -a /dev/sda
 ignition_file='/var/lib/microshift.ign'
 firstboot_args='console=tty0'
 install_device='/dev/sdb'
