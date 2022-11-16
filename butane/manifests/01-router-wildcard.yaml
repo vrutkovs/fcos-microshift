@@ -10,7 +10,7 @@ spec:
         - name: router
           env:
           - name: ROUTER_SUBDOMAIN
-            value: ${name}-${namespace}.apps.192.168.1.207.nip.io
+            value: ${name}-${namespace}.apps.192.168.1.165.nip.io
           - name: ROUTER_ALLOW_WILDCARD_ROUTES
             value: "true"
           - name: ROUTER_OVERRIDE_HOSTNAME

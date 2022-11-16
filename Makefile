@@ -1,4 +1,4 @@
-ISO=fedora-coreos-35.20220424.3.0-live.x86_64.iso
+ISO=fedora-coreos-37.20221106.2.1-live.x86_64.iso
 .PHONY: boot.ign microshift.ign
 
 $(ISO):

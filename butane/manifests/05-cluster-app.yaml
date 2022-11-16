@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     path: .
-    repoURL: 'https://gitea.vrutkovs.eu/vadim/microshift-gitops.git'
+    repoURL: 'https://github.com/vrutkovs/neptr.git'
     targetRevision: HEAD
   syncPolicy:
     automated: {}
