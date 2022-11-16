@@ -77,3 +77,9 @@ storage:
           # Raise console message logging level from DEBUG (7) to WARNING (4)
           # to hide audit messages from the interactive console
           kernel.printk=4
+    - path: /etc/systemd/logind.conf.d/prevent-sleep.conf
+      mode: 0644
+      contents:
+        inline: |
+          [Login]
+          HandleLidSwitch=ignore
